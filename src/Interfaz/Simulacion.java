@@ -1,10 +1,9 @@
 package Interfaz;
 
-import Elementos.SVGImages;
+import Hilos.SpawnLabels;
 import Hilos.Tiempo;
-import java.awt.Rectangle;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Simulacion extends javax.swing.JFrame {
 
+    private FlatSVGIcon svgIcono;
     private Tiempo t;
     public static Simulacion simio;
 
@@ -23,16 +23,20 @@ public class Simulacion extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        svgIcono = new FlatSVGIcon("img/house.svg", 40, 40);
+        Inicio.setIcon(svgIcono);
         t = new Tiempo(Cronometro, true);
         t.start();
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 1; i <= 15; i++) {
-                    if (i == 15) {
+                    if (i >= 15) {
                         t.apagar();
                     }
-                    spawnJLabel();
+                    //spawnJLabel();
+                    SpawnLabels sp = new SpawnLabels(panelPrincipal);
+                    sp.start();
                     //simio.repaint();
                     try {
                         Thread.sleep(1000);
@@ -52,53 +56,6 @@ public class Simulacion extends javax.swing.JFrame {
         return Cronometro;
     }
 
-    private void spawnJLabel() {
-        // Crea un nuevo JLabel personalizado y lo añade al panel.
-        SVGImages label = new SVGImages();
-        label.setSvgImages("img/pelota.svg", 50, 50);
-        panelPrincipal.add(label, JLayeredPane.PALETTE_LAYER);
-
-        // Establece la posición del JLabel y lo hace visible.
-        label.setBounds(100, 0, 50, 50);
-        label.setVisible(true);
-        //System.out.println(label.getBounds());
-        // Crea un hilo que se ejecuta en segundo plano y mueve el JLabel hacia abajo.
-
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (label.isVisible()) {
-                    // Obtiene la posición actual del JLabel.
-                    int currentY = label.getY();
-
-                    // Mueve el JLabel hacia abajo.
-                    label.setLocation(label.getX(), currentY + 10);
-
-                    Rectangle posI = label.getBounds();
-                    // Si el JLabel llega al borde inferior de la ventana, lo elimina y detiene el hilo de movimiento.
-                    if (currentY + label.getHeight() >= getHeight()) {
-                        label.setVisible(false);
-                        panelPrincipal.remove(label);
-                        panelPrincipal.revalidate(); // actualiza el panel después de eliminar el JLabel
-                        //contentPane.repaint(); // redibuja el panel
-
-                        break;
-                    }
-
-                    try {
-                        Thread.sleep(80);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-            }
-        });
-        t2.start();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,6 +73,13 @@ public class Simulacion extends javax.swing.JFrame {
         Cronometro = new javax.swing.JLabel();
         panelRound1 = new Elementos.PanelRound();
         panelPrincipal = new javax.swing.JLayeredPane();
+        Inventario = new Elementos.PanelRound();
+        InventarioE = new javax.swing.JLayeredPane();
+        panelRound3 = new Elementos.PanelRound();
+        panelRound4 = new Elementos.PanelRound();
+        panelRound5 = new Elementos.PanelRound();
+        Inicio = new javax.swing.JLabel();
+        conector1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,16 +139,94 @@ public class Simulacion extends javax.swing.JFrame {
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
-        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
-        panelPrincipal.setLayout(panelPrincipalLayout);
-        panelPrincipalLayout.setHorizontalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+        Inventario.setRoundBottomLeft(20);
+        Inventario.setRoundBottomRight(20);
+        Inventario.setRoundTopLeft(20);
+        Inventario.setRoundTopRight(20);
+
+        InventarioE.setBackground(new java.awt.Color(102, 102, 102));
+        InventarioE.setOpaque(true);
+        InventarioE.setLayout(new java.awt.GridLayout(5, 6));
+
+        javax.swing.GroupLayout InventarioLayout = new javax.swing.GroupLayout(Inventario);
+        Inventario.setLayout(InventarioLayout);
+        InventarioLayout.setHorizontalGroup(
+            InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InventarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(InventarioE)
+                .addContainerGap())
         );
-        panelPrincipalLayout.setVerticalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+        InventarioLayout.setVerticalGroup(
+            InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InventarioLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(InventarioE)
+                .addContainerGap())
         );
+
+        panelPrincipal.add(Inventario);
+        Inventario.setBounds(410, 260, 300, 180);
+
+        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
+        panelRound3.setLayout(panelRound3Layout);
+        panelRound3Layout.setHorizontalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelRound3Layout.setVerticalGroup(
+            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(panelRound3);
+        panelRound3.setBounds(410, 20, 300, 180);
+
+        javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
+        panelRound4.setLayout(panelRound4Layout);
+        panelRound4Layout.setHorizontalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelRound4Layout.setVerticalGroup(
+            panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(panelRound4);
+        panelRound4.setBounds(70, 20, 300, 180);
+
+        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
+        panelRound5.setLayout(panelRound5Layout);
+        panelRound5Layout.setHorizontalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelRound5Layout.setVerticalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(panelRound5);
+        panelRound5.setBounds(70, 260, 300, 180);
+        panelPrincipal.add(Inicio);
+        Inicio.setBounds(720, 210, 40, 40);
+
+        conector1.setAlignmentY(50.0F);
+
+        javax.swing.GroupLayout conector1Layout = new javax.swing.GroupLayout(conector1);
+        conector1.setLayout(conector1Layout);
+        conector1Layout.setHorizontalGroup(
+            conector1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        conector1Layout.setVerticalGroup(
+            conector1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(conector1);
+        conector1.setBounds(430, 200, 30, 60);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -192,14 +234,14 @@ public class Simulacion extends javax.swing.JFrame {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPrincipal)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPrincipal)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -211,7 +253,7 @@ public class Simulacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +261,7 @@ public class Simulacion extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,7 +285,12 @@ public class Simulacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "XD");
+        if (!Tiempo.activar) {
+            Menu_Inicial m = new Menu_Inicial();
+            m.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -284,6 +331,10 @@ public class Simulacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Cronometro;
+    private javax.swing.JLabel Inicio;
+    private Elementos.PanelRound Inventario;
+    public static javax.swing.JLayeredPane InventarioE;
+    private javax.swing.JPanel conector1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -291,5 +342,8 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLayeredPane panelPrincipal;
     private Elementos.PanelRound panelRound1;
+    private Elementos.PanelRound panelRound3;
+    private Elementos.PanelRound panelRound4;
+    private Elementos.PanelRound panelRound5;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 public class Tiempo extends Thread {
 
     JLabel rotulo;
-    boolean activar;
+    public static boolean activar;
 
     public Tiempo(JLabel rotulo, boolean activar) {
         this.rotulo = rotulo;

@@ -19,7 +19,7 @@ public class SVGImages extends JLabel {
 
         }));
         setIcon(svgIcono);
-        cambiar();
+        //cambiar();
     }
 
     public void cambiar() {
@@ -46,6 +46,6 @@ public class SVGImages extends JLabel {
             }
 
         });
-        moveThread2.start();
+        //moveThread2.start();
     }
 }
