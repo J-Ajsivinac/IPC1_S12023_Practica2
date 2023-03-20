@@ -46,11 +46,13 @@ public class SpawnLabels extends Thread {
 
     public void run() {
         while (label.isVisible()) {
+            
             Component[] components = Simulacion.InventarioE.getComponents();
             Simulacion.numInventario.setText(components.length + "");
             // Obtiene la posición actual del JLabel.
             int currentY = label.getY();
             if (label.getY() <= 340 && primero) {
+                
                 label.setLocation(label.getX(), currentY + 10);
             }
 
@@ -75,6 +77,7 @@ public class SpawnLabels extends Thread {
                         numInventario.setText(components1.length + "");
                         label.setBounds(430, 250, 50, 50);
                         label.repaint();
+                        label.transicionProduccion();
                     }
                 }
                 int currentY1 = label.getY();
@@ -99,6 +102,7 @@ public class SpawnLabels extends Thread {
                         Simulacion.numProd.setText(components1.length + "");
                         label.setBounds(410, 40, 50, 50);
                         label.repaint();
+                        label.transicionEmpaquetado();
                     }
                 }
 
@@ -125,6 +129,7 @@ public class SpawnLabels extends Thread {
                         Simulacion.numEmpa.setText(components1.length + "");
                         label.setBounds(70, 185, 50, 50);
                         label.repaint();
+                        label.transicionSalida();
                     }
                 }
 
@@ -142,18 +147,20 @@ public class SpawnLabels extends Thread {
             }
             if (cambio4) {
                 Component[] components3 = Simulacion.Salida1.getComponents();
-
                 for (Component component : components3) {
                     if (component.equals(label)) {
                         //movArriba(label);
                         Simulacion.Salida1.remove(label);
                         Simulacion.Salida1.revalidate();
                         Simulacion.Salida1.repaint();
-                        panelP.add(label);
+                        Simulacion.panelTransicion.add(label);
                         Component[] components1 = Simulacion.Salida1.getComponents();
-
+                        Component[] compoF = Simulacion.panelTransicion.getComponents();
                         Simulacion.numSalida.setText(components1.length + "");
-                        label.setBounds(70, 350, 50, 50);
+                        if (compoF.length >= 15) {
+                            Simulacion.t.apagar();
+                        }
+                        label.setBounds(60, 100, 50, 50);
                         label.repaint();
 
                     }
@@ -162,8 +169,8 @@ public class SpawnLabels extends Thread {
                 int currentX4 = label.getX();
                 if (currentX4 <= 20) {
                     label.setLocation(label.getX(), label.getY() - 10);
-                    if (label.getY() <= 210) {
-                        
+                    if (label.getY() <= 0) {
+                        label.setVisible(false);
                         cambio1 = false;
                         cambio2 = false;
                         cambio3 = false;
@@ -244,12 +251,8 @@ public class SpawnLabels extends Thread {
                 }
                 break;
             case 5:
-                panelP.remove(label);
-                panelP.revalidate();
-                Simulacion.Final1.add(label);
-                label.repaint();
-                label.setVisible(false);
-                Component[] c5 = Simulacion.Final1.getComponents();
+                Component[] c5 = Simulacion.panelTransicion.getComponents();
+                Simulacion.lblContadorF.setText(c5.length + "");
                 if (c5.length >= 15) {
                     Simulacion.t.apagar();
                 }

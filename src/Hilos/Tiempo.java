@@ -35,12 +35,12 @@ public class Tiempo extends Thread {
             }
         }
 
-        segundos++;
-        if (segundos == 60) {
-            segundos = 0;
-            min++;
-        }
-        rotulo.setText(String.format("%02d", min) + ":" + String.format("%02d", segundos));
+        //segundos++;
+        //if (segundos == 60) {
+           // segundos = 0;
+            //min++;
+        //}
+        //rotulo.setText(String.format("%02d", min) + ":" + String.format("%02d", segundos));
     }
 
     public void apagar() {

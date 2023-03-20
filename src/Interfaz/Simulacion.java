@@ -3,8 +3,10 @@ package Interfaz;
 import Hilos.SpawnLabels;
 import Hilos.Tiempo;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.util.function.Function;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -17,6 +19,8 @@ public class Simulacion extends javax.swing.JFrame {
     private FlatSVGIcon svgIcono;
     public static Tiempo t;
     public static Simulacion simio;
+    private int contadorInicio = 30;
+    private FlatSVGIcon.ColorFilter fl;
 
     /**
      * Creates new form Simulacion
@@ -29,12 +33,25 @@ public class Simulacion extends javax.swing.JFrame {
         Produccion1.setLayout(new FlowLayout(FlowLayout.LEFT));
         Empaquetado.setLayout(new FlowLayout(FlowLayout.LEFT));
         Salida1.setLayout(new FlowLayout(FlowLayout.LEFT));
+        
+        fl = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return Color.white;
+            }
+
+        });
+        
         svgIcono = new FlatSVGIcon("img/house.svg", 40, 40);
+        svgIcono.setColorFilter(fl);
         FlatSVGIcon svgIcono1 = new FlatSVGIcon("img/salida.svg", 40, 40);
+        svgIcono1.setColorFilter(fl);
         Inicio.setIcon(svgIcono);
         salidaimagen.setIcon(svgIcono1);
         t = new Tiempo(Cronometro, true);
         t.start();
+        
+        
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -42,6 +59,9 @@ public class Simulacion extends javax.swing.JFrame {
                     if (i >= 15) {
                         //t.apagar();
                     }
+                    contadorInicio--;
+                    lblContadorI.setText(contadorInicio + "");
+
                     //spawnJLabel();
                     SpawnLabels sp = new SpawnLabels(panelPrincipal, Cronometro, i);
                     sp.start();
@@ -52,7 +72,7 @@ public class Simulacion extends javax.swing.JFrame {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    
+
                 }
 
             }
@@ -102,8 +122,15 @@ public class Simulacion extends javax.swing.JFrame {
         conector1 = new javax.swing.JPanel();
         salidaimagen = new javax.swing.JLabel();
         Final1 = new javax.swing.JLayeredPane();
+        lblContadorI = new javax.swing.JLabel();
+        panelTransicion = new javax.swing.JLayeredPane();
+        lblContadorF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(18, 30, 42));
+
+        jPanel2.setOpaque(false);
 
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -155,23 +182,31 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        panelRound1.setBackground(new java.awt.Color(51, 51, 51));
+        panelRound1.setBackground(new java.awt.Color(23, 34, 49));
         panelRound1.setRoundBottomLeft(20);
         panelRound1.setRoundBottomRight(20);
         panelRound1.setRoundTopLeft(20);
         panelRound1.setRoundTopRight(20);
 
+        panelPrincipal.setBackground(new java.awt.Color(27, 42, 60));
+
+        Inventario.setBackground(new java.awt.Color(51, 169, 254));
         Inventario.setRoundBottomLeft(20);
         Inventario.setRoundBottomRight(20);
         Inventario.setRoundTopLeft(20);
         Inventario.setRoundTopRight(20);
 
         InventarioE.setBackground(new java.awt.Color(102, 102, 102));
-        InventarioE.setOpaque(true);
         InventarioE.setLayout(new java.awt.FlowLayout());
 
+        jLabel2.setBackground(new java.awt.Color(38, 57, 80));
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(38, 57, 80));
         jLabel2.setText("Inventario:");
 
+        numInventario.setBackground(new java.awt.Color(38, 57, 80));
+        numInventario.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        numInventario.setForeground(new java.awt.Color(38, 57, 80));
         numInventario.setText("0");
 
         javax.swing.GroupLayout InventarioLayout = new javax.swing.GroupLayout(Inventario);
@@ -183,18 +218,19 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGroup(InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(InventarioE, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(InventarioLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(numInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(numInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         InventarioLayout.setVerticalGroup(
             InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InventarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(numInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(InventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(InventarioE, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
@@ -203,12 +239,23 @@ public class Simulacion extends javax.swing.JFrame {
         panelPrincipal.add(Inventario);
         Inventario.setBounds(410, 260, 300, 180);
 
+        panelRound3.setBackground(new java.awt.Color(53, 223, 145));
+        panelRound3.setRoundBottomLeft(20);
+        panelRound3.setRoundBottomRight(20);
+        panelRound3.setRoundTopLeft(20);
+        panelRound3.setRoundTopRight(20);
+
+        jLabel3.setBackground(new java.awt.Color(38, 57, 80));
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(18, 104, 63));
         jLabel3.setText("Producción: ");
 
+        numProd.setBackground(new java.awt.Color(38, 57, 80));
+        numProd.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        numProd.setForeground(new java.awt.Color(18, 104, 63));
         numProd.setText("0");
 
         Produccion1.setBackground(new java.awt.Color(102, 102, 102));
-        Produccion1.setOpaque(true);
         Produccion1.setLayout(new java.awt.FlowLayout());
 
         javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
@@ -217,11 +264,11 @@ public class Simulacion extends javax.swing.JFrame {
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(numProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(numProd, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Produccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -229,8 +276,8 @@ public class Simulacion extends javax.swing.JFrame {
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(numProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Produccion1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,12 +287,23 @@ public class Simulacion extends javax.swing.JFrame {
         panelPrincipal.add(panelRound3);
         panelRound3.setBounds(410, 20, 300, 180);
 
+        panelRound4.setBackground(new java.awt.Color(250, 199, 98));
+        panelRound4.setRoundBottomLeft(20);
+        panelRound4.setRoundBottomRight(20);
+        panelRound4.setRoundTopLeft(20);
+        panelRound4.setRoundTopRight(20);
+
         Empaquetado.setBackground(new java.awt.Color(102, 102, 102));
-        Empaquetado.setOpaque(true);
         Empaquetado.setLayout(new java.awt.FlowLayout());
 
+        jLabel4.setBackground(new java.awt.Color(38, 57, 80));
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(149, 103, 10));
         jLabel4.setText("Empaquetado:");
 
+        numEmpa.setBackground(new java.awt.Color(38, 57, 80));
+        numEmpa.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        numEmpa.setForeground(new java.awt.Color(149, 103, 10));
         numEmpa.setText("0");
 
         javax.swing.GroupLayout panelRound4Layout = new javax.swing.GroupLayout(panelRound4);
@@ -257,10 +315,11 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGroup(panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Empaquetado, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelRound4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numEmpa, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(numEmpa, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         panelRound4Layout.setVerticalGroup(
             panelRound4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,12 +336,23 @@ public class Simulacion extends javax.swing.JFrame {
         panelPrincipal.add(panelRound4);
         panelRound4.setBounds(70, 20, 300, 180);
 
+        panelRound5.setBackground(new java.awt.Color(244, 121, 96));
+        panelRound5.setRoundBottomLeft(20);
+        panelRound5.setRoundBottomRight(20);
+        panelRound5.setRoundTopLeft(20);
+        panelRound5.setRoundTopRight(20);
+
         Salida1.setBackground(new java.awt.Color(102, 102, 102));
-        Salida1.setOpaque(true);
         Salida1.setLayout(new java.awt.FlowLayout());
 
+        jLabel5.setBackground(new java.awt.Color(38, 57, 80));
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(135, 40, 22));
         jLabel5.setText("Salida:");
 
+        numSalida.setBackground(new java.awt.Color(38, 57, 80));
+        numSalida.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        numSalida.setForeground(new java.awt.Color(135, 40, 22));
         numSalida.setText("0");
 
         javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
@@ -296,9 +366,9 @@ public class Simulacion extends javax.swing.JFrame {
                         .addComponent(Salida1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(numSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(numSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         panelRound5Layout.setVerticalGroup(
@@ -319,6 +389,7 @@ public class Simulacion extends javax.swing.JFrame {
         Inicio.setBounds(720, 210, 40, 40);
 
         conector1.setAlignmentY(50.0F);
+        conector1.setOpaque(false);
 
         javax.swing.GroupLayout conector1Layout = new javax.swing.GroupLayout(conector1);
         conector1.setLayout(conector1Layout);
@@ -348,7 +419,38 @@ public class Simulacion extends javax.swing.JFrame {
         );
 
         panelPrincipal.add(Final1);
-        Final1.setBounds(10, 100, 38, 100);
+        Final1.setBounds(20, 10, 38, 100);
+
+        lblContadorI.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
+        lblContadorI.setForeground(new java.awt.Color(255, 255, 255));
+        lblContadorI.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorI.setText("30");
+        panelPrincipal.add(lblContadorI);
+        lblContadorI.setBounds(720, 180, 50, 30);
+
+        panelTransicion.setBackground(new java.awt.Color(153, 153, 153));
+        panelTransicion.setForeground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout panelTransicionLayout = new javax.swing.GroupLayout(panelTransicion);
+        panelTransicion.setLayout(panelTransicionLayout);
+        panelTransicionLayout.setHorizontalGroup(
+            panelTransicionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 70, Short.MAX_VALUE)
+        );
+        panelTransicionLayout.setVerticalGroup(
+            panelTransicionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+
+        panelPrincipal.add(panelTransicion);
+        panelTransicion.setBounds(0, 250, 70, 130);
+
+        lblContadorF.setFont(new java.awt.Font("Montserrat", 1, 15)); // NOI18N
+        lblContadorF.setForeground(new java.awt.Color(255, 255, 255));
+        lblContadorF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblContadorF.setText("0");
+        panelPrincipal.add(lblContadorF);
+        lblContadorF.setBounds(0, 170, 60, 30);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -375,7 +477,7 @@ public class Simulacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,6 +572,8 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public static javax.swing.JLabel lblContadorF;
+    private javax.swing.JLabel lblContadorI;
     public static javax.swing.JLabel numEmpa;
     public static javax.swing.JLabel numInventario;
     public static javax.swing.JLabel numProd;
@@ -479,6 +583,7 @@ public class Simulacion extends javax.swing.JFrame {
     private Elementos.PanelRound panelRound3;
     private Elementos.PanelRound panelRound4;
     private Elementos.PanelRound panelRound5;
+    public static javax.swing.JLayeredPane panelTransicion;
     private javax.swing.JLabel salidaimagen;
     // End of variables declaration//GEN-END:variables
 }
