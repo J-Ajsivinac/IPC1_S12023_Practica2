@@ -30,7 +30,7 @@ public class SVGImages extends JLabel {
         Color finalColor = new Color(1, 113, 195);
         Thread moveThread2 = new Thread(() -> {
             int duration = 800; // Duración de la transición en milisegundos
-            int steps = 4; // Número de pasos de la transición
+            int steps = 60; // Número de pasos de la transición
 
             for (int i = 0; i <= steps; i++) {
                 float ratio = (float) i / steps;

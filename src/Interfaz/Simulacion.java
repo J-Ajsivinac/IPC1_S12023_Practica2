@@ -44,14 +44,20 @@ public class Simulacion extends javax.swing.JFrame {
             }
 
         });
+        FlatSVGIcon.ColorFilter flechas = new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(136, 143, 184);
+            }
+        });//47, 71, 102
         FlatSVGIcon arriba = new FlatSVGIcon("img/flechaA2.svg", 40, 40);
         FlatSVGIcon izquierda = new FlatSVGIcon("img/flechaI.svg", 40, 40);
         FlatSVGIcon abajo = new FlatSVGIcon("img/flechaAbajo.svg", 40, 40);
         svgIcono = new FlatSVGIcon("img/house.svg", 40, 40);
         svgIcono.setColorFilter(fl);
-        arriba.setColorFilter(fl);
-        izquierda.setColorFilter(fl);
-        abajo.setColorFilter(fl);
+        arriba.setColorFilter(flechas);
+        izquierda.setColorFilter(flechas);
+        abajo.setColorFilter(flechas);
         FlatSVGIcon svgIcono1 = new FlatSVGIcon("img/salida.svg", 40, 40);
         svgIcono1.setColorFilter(fl);
         Inicio.setIcon(svgIcono);
@@ -103,8 +109,6 @@ public class Simulacion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Cronometro = new javax.swing.JLabel();
         panelRound2 = new Elementos.PanelRound();
@@ -112,6 +116,8 @@ public class Simulacion extends javax.swing.JFrame {
         panelRound7 = new Elementos.PanelRound();
         lblSeg = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        buttonRound1 = new Elementos.ButtonRound();
+        buttonRound2 = new Elementos.ButtonRound();
         panelRound1 = new Elementos.PanelRound();
         panelPrincipal = new javax.swing.JLayeredPane();
         Inventario = new Elementos.PanelRound();
@@ -140,6 +146,8 @@ public class Simulacion extends javax.swing.JFrame {
         flecha1 = new javax.swing.JLabel();
         lblIzq = new javax.swing.JLabel();
         lblAbajo = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,20 +155,6 @@ public class Simulacion extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(32, 33, 44));
         jPanel2.setOpaque(false);
-
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Regresar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel1.setText("Tiempo Transcurrido");
@@ -221,52 +215,62 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText(":");
 
+        buttonRound1.setBorder(null);
+        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRound1.setText("Regresar");
+        buttonRound1.setBorderColor(new java.awt.Color(31, 118, 254));
+        buttonRound1.setColor(new java.awt.Color(31, 118, 254));
+        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound1.setRadius(20);
+
+        buttonRound2.setBorder(null);
+        buttonRound2.setForeground(new java.awt.Color(255, 255, 255));
+        buttonRound2.setText("Reporte");
+        buttonRound2.setBorderColor(new java.awt.Color(31, 118, 254));
+        buttonRound2.setColor(new java.awt.Color(31, 118, 254));
+        buttonRound2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        buttonRound2.setRadius(20);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Cronometro)
+                .addGap(68, 68, 68)
+                .addComponent(jLabel1)
+                .addGap(343, 343, 343))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112)
-                        .addComponent(Cronometro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(212, 212, 212))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(195, 195, 195)))
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(17, 17, 17)
+                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(panelRound7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(215, 215, 215)
+                .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(panelRound7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Cronometro)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(16, 16, 16))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(Cronometro))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(panelRound2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelRound7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(buttonRound2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         panelRound1.setBackground(new java.awt.Color(32, 33, 44));
@@ -552,6 +556,20 @@ public class Simulacion extends javax.swing.JFrame {
         panelPrincipal.add(lblAbajo);
         lblAbajo.setBounds(180, 200, 50, 60);
 
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Final");
+        panelPrincipal.add(jLabel6);
+        jLabel6.setBounds(0, 140, 70, 30);
+
+        jLabel9.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Inicio");
+        panelPrincipal.add(jLabel9);
+        jLabel9.setBounds(740, 146, 60, 30);
+
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
         panelRound1Layout.setHorizontalGroup(
@@ -602,21 +620,6 @@ public class Simulacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (!Tiempo.activar) {
-            Menu_Inicial m = new Menu_Inicial();
-            m.setVisible(true);
-            this.dispose();
-        }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -662,17 +665,19 @@ public class Simulacion extends javax.swing.JFrame {
     public static javax.swing.JLayeredPane InventarioE;
     public static javax.swing.JLayeredPane Produccion1;
     public static javax.swing.JLayeredPane Salida1;
+    private Elementos.ButtonRound buttonRound1;
+    private Elementos.ButtonRound buttonRound2;
     private javax.swing.JPanel conector1;
     private javax.swing.JLabel flecha1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAbajo;
