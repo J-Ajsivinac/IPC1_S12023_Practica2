@@ -2,8 +2,13 @@ package Interfaz;
 
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkContrastIJTheme;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -13,6 +18,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Menu_Inicial extends javax.swing.JFrame {
 
+    public static int tiempoI = 0, tiempoP = 0, tiempoE = 0, tiempoS = 0, costoI = 0, costoP = 0, costoE = 0, costoS = 0;
+
     /**
      * Creates new form Menu_Inicial
      */
@@ -21,7 +28,54 @@ public class Menu_Inicial extends javax.swing.JFrame {
         this.setTitle("Menú Inicial");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
+    }
+
+    public void iniciarSimulacion() {
+        boolean verificar = false;
+        int contador = 0;
+        if (txtCostoE.getText().trim().isEmpty() || txtCostoI.getText().trim().isEmpty() || txtCostoP.getText().trim().isEmpty() || txtCostoS.getText().trim().isEmpty()
+                || txtTiempoE.getText().trim().isEmpty() || txtTiempoI.getText().trim().isEmpty() || txtTiempoP.getText().trim().isEmpty() || txtTiempoS.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
+        } else {
+            String[] valores = {txtTiempoI.getText(), txtTiempoP.getText(), txtTiempoE.getText(), txtTiempoS.getText(), txtCostoI.getText(), txtCostoP.getText(), txtCostoE.getText(), txtCostoS.getText()};
+            //String[] nombre = {"Tiempo del Inventario","Tiempo de Producción", "Tiempo del Empaquetado","Tiempo de Salida","Costo del Invernario", "Costo de Producción","Costo del Empaquetado","Costo de Salida"};
+            for (int i = 0; i < valores.length; i++) {
+                if (valores[i].matches("[0-9]*")) {
+                    contador++;
+                }
+            }
+            if (contador == 8) {
+                tiempoI = Integer.parseInt(txtTiempoI.getText());
+                tiempoP = Integer.parseInt(txtTiempoP.getText());
+                tiempoE = Integer.parseInt(txtTiempoE.getText());
+                tiempoS = Integer.parseInt(txtTiempoS.getText());
+
+                costoI = Integer.parseInt(txtCostoI.getText());
+                costoP = Integer.parseInt(txtCostoP.getText());
+                costoE = Integer.parseInt(txtCostoE.getText());
+                costoS = Integer.parseInt(txtCostoS.getText());
+
+                Simulacion s = new Simulacion();
+                s.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Uno de los datos ingresados no es correcto");
+            }
+        }
+    }
+
+    public void soloNum(JTextField txt, java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            txt.setEditable(false);
+            txt.putClientProperty("Component.outlineWidth", 1);
+            txt.putClientProperty("JComponent.outline", "error");
+        } else {
+            txt.putClientProperty("Component.outlineWidth", 1);
+            txt.putClientProperty("JComponent.outline", "correct");
+            txt.setEditable(true);
+        }
     }
 
     /**
@@ -42,53 +96,119 @@ public class Menu_Inicial extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtTiempoI = new javax.swing.JTextField();
+        txtCostoI = new javax.swing.JTextField();
+        txtTiempoP = new javax.swing.JTextField();
+        txtCostoP = new javax.swing.JTextField();
+        txtTiempoE = new javax.swing.JTextField();
+        txtCostoE = new javax.swing.JTextField();
+        txtCostoS = new javax.swing.JTextField();
+        txtTiempoS = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(23, 24, 31));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido a Monkey");
 
-        panelRound1.setBackground(new java.awt.Color(102, 102, 102));
+        panelRound1.setBackground(new java.awt.Color(32, 33, 44));
         panelRound1.setRoundBottomLeft(15);
         panelRound1.setRoundBottomRight(15);
         panelRound1.setRoundTopLeft(15);
         panelRound1.setRoundTopRight(15);
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Inventario");
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Tiempo (s)");
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Costo(Q/s)");
 
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Producción");
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Empaquetado");
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Salida");
 
-        jTextField1.setText("jTextField1");
+        txtTiempoI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTiempoIKeyPressed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField1");
+        txtCostoI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostoIKeyPressed(evt);
+            }
+        });
 
-        jTextField3.setText("jTextField1");
+        txtTiempoP.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTiempoPKeyPressed(evt);
+            }
+        });
 
-        jTextField4.setText("jTextField1");
+        txtCostoP.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostoPKeyPressed(evt);
+            }
+        });
 
-        jTextField5.setText("jTextField1");
+        txtTiempoE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTiempoEKeyPressed(evt);
+            }
+        });
 
-        jTextField6.setText("jTextField1");
+        txtCostoE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostoEKeyPressed(evt);
+            }
+        });
 
-        jTextField7.setText("jTextField1");
+        txtCostoS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCostoSKeyPressed(evt);
+            }
+        });
 
-        jTextField8.setText("jTextField1");
+        txtTiempoS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTiempoSKeyPressed(evt);
+            }
+        });
 
         jButton1.setText("Iniciar Simulación");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,41 +223,37 @@ public class Menu_Inicial extends javax.swing.JFrame {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel4)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(181, 181, 181))))
+                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(txtTiempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCostoE, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(txtTiempoP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCostoP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addComponent(txtTiempoS, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCostoS, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelRound1Layout.createSequentialGroup()
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(txtTiempoI))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCostoI)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,27 +264,27 @@ public class Menu_Inicial extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiempoI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCostoI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiempoP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCostoP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(24, 24, 24)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCostoE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiempoS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCostoS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -176,31 +292,27 @@ public class Menu_Inicial extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,10 +324,51 @@ public class Menu_Inicial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //iniciarSimulacion();
         Simulacion s = new Simulacion();
         s.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtTiempoIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoIKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtTiempoI, evt);
+    }//GEN-LAST:event_txtTiempoIKeyPressed
+
+    private void txtCostoIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoIKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtCostoI, evt);
+    }//GEN-LAST:event_txtCostoIKeyPressed
+
+    private void txtTiempoPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoPKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtTiempoP, evt);
+    }//GEN-LAST:event_txtTiempoPKeyPressed
+
+    private void txtCostoPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoPKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtCostoP, evt);
+    }//GEN-LAST:event_txtCostoPKeyPressed
+
+    private void txtTiempoEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoEKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtTiempoE, evt);
+    }//GEN-LAST:event_txtTiempoEKeyPressed
+
+    private void txtCostoEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoEKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtCostoE, evt);
+    }//GEN-LAST:event_txtCostoEKeyPressed
+
+    private void txtTiempoSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoSKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtTiempoS, evt);
+    }//GEN-LAST:event_txtTiempoSKeyPressed
+
+    private void txtCostoSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoSKeyPressed
+        // TODO add your handling code here:
+        soloNum(txtCostoS, evt);
+    }//GEN-LAST:event_txtCostoSKeyPressed
 
     /**
      * @param args the command line arguments
@@ -226,13 +379,23 @@ public class Menu_Inicial extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-      try {
-            UIManager.setLookAndFeel(new FlatAtomOneDarkContrastIJTheme());
+        try {
+            UIManager.setLookAndFeel(new FlatOneDarkIJTheme());
             //UIManager.put("TextComponent.arc", 999);
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Menu_Inicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        //UIManager.put("defaultFont", new Font("Montserrat", 0, 13));
+        UIManager.put("Component.arrowType", "chevron");
+        //85/89/146
+        UIManager.put("Component.focusedBorderColor", new Color(129, 135, 222));
+        UIManager.put("TextComponent.arc", 10);
+        UIManager.put("Component.arc", 10);
+        UIManager.put("TextField.margin", new Insets(0, 10, 0, 10));
+        UIManager.put("PasswordField.margin", new Insets(0, 10, 0, 10));
+        UIManager.put("ComboBox.selectionArc", 10);
+        UIManager.put("TextField.background", new Color(28, 29, 33));
+        //</editor-fold> 28, 29, 33
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -252,14 +415,14 @@ public class Menu_Inicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private Elementos.PanelRound panelRound1;
+    private javax.swing.JTextField txtCostoE;
+    private javax.swing.JTextField txtCostoI;
+    private javax.swing.JTextField txtCostoP;
+    private javax.swing.JTextField txtCostoS;
+    private javax.swing.JTextField txtTiempoE;
+    private javax.swing.JTextField txtTiempoI;
+    private javax.swing.JTextField txtTiempoP;
+    private javax.swing.JTextField txtTiempoS;
     // End of variables declaration//GEN-END:variables
 }

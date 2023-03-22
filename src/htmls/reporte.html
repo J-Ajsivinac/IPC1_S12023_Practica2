@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/e73cd8025f.js" crossorigin="anonymous"></script>
+    <title>Reporte</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+        }
+
+        .content {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            background: linear-gradient(150deg, rgba(64,68,82,1) 26%, rgba(54,58,69,1) 50%, rgba(40,43,51,1) 77%);
+        }
+
+        .content .card {
+            box-sizing: border-box;
+            border: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: .5s;
+            width: 50%;
+            min-width: 600px;
+            height: 420px;
+            background-color: #272b34;
+            border-radius: 16px;
+            box-shadow: rgba(23, 24, 31, 0.5) 16px 16px 22px 0px;
+
+        }
+
+        .content .card .superior {
+            width: 100%;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
+
+        .content .card .superior .datos{
+            width: 40%;
+            display: flex;
+            font-size: 18px;
+            flex-direction: column;
+            align-items: end;
+            font-weight: bold;
+        }
+
+        .content .card .superior img {
+            width: 10%;
+        }
+
+        .content .card .centro {
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 210px;
+            border-radius: 16px;
+            background-color: #303540;
+            box-shadow: rgba(23, 24, 31, 0.4) 0px 6px 16px 0px;
+
+        }
+
+        .content .card .centro .datosGuia {
+            width: 100%;
+            height: 96%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+
+        }
+
+        .content .card .centro .datosGuia .contendedorD {
+            padding-left: 2%;
+            padding-right: 2%;
+            height: 25%;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .content .card .centro .datosGuia .contendedorD span .texto {
+            padding-left: 0.5vh;
+        }
+
+        .content .card .centro .datosGuia .contendedorD span i {
+            width: 20px;
+        }
+
+        .content .card .centro .datosGuia .contendedorD .conten-origen {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            align-items: end;
+            justify-content: center;
+            height: 95%;
+        }
+
+        
+        .content .card .centro .datosGuia .contendedorD .conten-origen #dOrigen,#dDestino {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .content .card .centro .datosGuia .contendedorD .conten-origen #dDireccionOrigen,#dDireccionDestino {
+            color: #6f6f71;
+            font-size: 15px;
+        }
+
+        .content .contenBarras .contenedorCodigo img {
+            width: 90%;
+            height: 90px;
+
+        }
+
+        .content .card .inferior {
+            margin-top: 18px;
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            border-radius: 16px;
+            background-color: #303540;
+            box-shadow: rgba(23, 24, 31, 0.4) 0px 6px 16px 0px;
+        }
+
+        .content .card .inferior .cPrecios{
+            width: 100%;
+            border-radius: 16px;
+            background-color: #25262e;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+            display: flex;
+            flex-direction: row;
+            height: 97%;
+            padding-left: 15px;
+            padding-right: 15px;
+            align-items: center;
+        }
+
+        .content .card .inferior .contendedorD {
+            padding-left: 2%;
+            padding-right: 2%;
+            height: 25%;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .content .card .inferior .contendedorD span i {
+            width: 20px;
+        }
+
+        .content .contenBarras {
+            margin-top: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 0;
+            padding: 0;
+            padding-top: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: cener;
+            min-width: 600px;
+            transition: .5s;
+            width: 50%;
+            height: 30px;
+            border-radius: 16px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="card">
+            <div class="superior">
+                <div class="imagen">
+                    <i style="font-size: 35px;" class="fa-sharp fa-solid fa-file-invoice-dollar"></i>
+                </div>
+
+                <div class="datos">
+                    <div id="codigoPaquete">
+                        Reporte
+                    </div>
+                </div>
+            </div>
+            <div class="centro">
+                <div class="datosGuia">
+                    <div class="contendedorD">
+                        <span>
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <span class="texto">Inventario</span>
+                        </span>
+                        <div class="conten-origen">
+                            <span id="dInventario">
+                                0.00
+                            </span>
+                           
+                        </div>
+                    </div>
+                    <div class="contendedorD">
+                        <span>
+                            <i class="fa-solid fa-industry"></i>
+                            <span class="texto">Producción</span>
+                        </span>
+                        <div class="conten-origen">
+                            <span id="dProduccion">
+                                0.00
+                            </span>
+                            
+                            </div>
+                    </div>
+                    <div class="contendedorD">
+                        <span>
+                            <i class="fa-solid fa-box"></i>
+                            <span class="texto">Empaquetado</span>
+                        </span>
+                        <span id="dEmpaquetado">
+                            0.00
+                        </span>
+                    </div>
+                    <div class="contendedorD">
+                        <span>
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span class="texto">Salida</span>
+                        </span>
+                        <span id="dSalida">
+                            0.00
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="inferior">
+                    <div class="contendedorD">
+                        <span>
+                            <i class="fa-sharp fa-solid fa-coins"></i>
+                            <span class="texto">TOTAL</span>
+                        </span>
+                        <div class="conten-origen">
+                            <span style="font-weight: bold;" id="dTotal">
+                                0.00
+                            </span>
+                           
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        <div class="contenBarras">
+            <div class="contenedorCodigo">
+                <span>Joab Israel Ajsivinac Ajsivinac, 202200135</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
