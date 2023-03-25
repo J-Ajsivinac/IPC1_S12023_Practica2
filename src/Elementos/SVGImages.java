@@ -8,9 +8,6 @@ import javax.swing.JLabel;
 public class SVGImages extends JLabel {
 
     private FlatSVGIcon svgIcono;
-    private float inconColor = 0;
-    private float saturacion = (float) 0.033;
-    private float valor = (float) 0.718;
 
     public void setSvgImages(String imagen, int width, int height) {
         svgIcono = new FlatSVGIcon(imagen, width, height);
@@ -22,7 +19,6 @@ public class SVGImages extends JLabel {
 
         }));
         setIcon(svgIcono);
-        //cambiar();
     }
 
     public void cambiar() {

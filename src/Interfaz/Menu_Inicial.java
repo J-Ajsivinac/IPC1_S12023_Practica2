@@ -7,10 +7,15 @@ import java.awt.Insets;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.Border;
 
 /**
  *
@@ -28,8 +33,9 @@ public class Menu_Inicial extends javax.swing.JFrame {
         this.setTitle("Menú Inicial");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+
         Simulacion.bloqueoBTN = false;
-        FlatSVGIcon svgBtn2 = new FlatSVGIcon("img/iniciar.svg", 12, 12);
+        FlatSVGIcon svgBtn2 = new FlatSVGIcon("img/iniciar.svg", 8, 8);
         svgBtn2.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
             @Override
             public Color apply(Color t) {
@@ -37,8 +43,12 @@ public class Menu_Inicial extends javax.swing.JFrame {
             }
 
         }));
+        Border border = BorderFactory.createEmptyBorder(0, 10, 0, 0);
+        //txtTiempoI.setBorder(BorderFactory.createCompoundBorder(border, txtTiempoI.getBorder()));
         btnIniciar.setIcon(svgBtn2);
+        //txtTiempoI.putClientProperty("JTextField.leadingIcon", svgBtn2);
 
+        //txtTiempoI.putClientProperty("JTextField.leadingIconGap", 20);
     }
 
     public void iniciarSimulacion() {
@@ -92,6 +102,19 @@ public class Menu_Inicial extends javax.swing.JFrame {
         }
     }
 
+    public void verificarNum(JTextField txt) {
+        if (txt.isEditable()) {
+            if (!txt.getText().matches("[0-9]*")) {
+                txt.putClientProperty("Component.outlineWidth", 1);
+                txt.putClientProperty("JComponent.outline", "error");
+
+            } else {
+                txt.putClientProperty("Component.outlineWidth", 1);
+                txt.putClientProperty("JComponent.outline", "correct");
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,9 +160,9 @@ public class Menu_Inicial extends javax.swing.JFrame {
         panelRound1.setRoundTopRight(20);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Inventario");
+        jLabel2.setText("Inventario:");
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
@@ -154,24 +177,27 @@ public class Menu_Inicial extends javax.swing.JFrame {
         jLabel4.setText("Costo(Q/s)");
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Producción");
+        jLabel5.setText("Producción:");
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Empaquetado");
+        jLabel6.setText("Empaquetado:");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Salida");
+        jLabel7.setText("Salida:");
 
         txtTiempoI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTiempoI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoIKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTiempoIKeyReleased(evt);
             }
         });
 
@@ -180,12 +206,18 @@ public class Menu_Inicial extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoIKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoIKeyReleased(evt);
+            }
         });
 
         txtTiempoP.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTiempoP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoPKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTiempoPKeyReleased(evt);
             }
         });
 
@@ -194,12 +226,18 @@ public class Menu_Inicial extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoPKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoPKeyReleased(evt);
+            }
         });
 
         txtTiempoE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtTiempoE.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoEKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTiempoEKeyReleased(evt);
             }
         });
 
@@ -208,12 +246,18 @@ public class Menu_Inicial extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoEKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoEKeyReleased(evt);
+            }
         });
 
         txtCostoS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
         txtCostoS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoSKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoSKeyReleased(evt);
             }
         });
 
@@ -222,15 +266,18 @@ public class Menu_Inicial extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoSKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTiempoSKeyReleased(evt);
+            }
         });
 
         btnIniciar.setBorder(null);
         btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciar.setText(" Iniciar Simulación");
-        btnIniciar.setBorderColor(new java.awt.Color(31, 118, 254));
-        btnIniciar.setColor(new java.awt.Color(31, 118, 254));
-        btnIniciar.setColorClick(new java.awt.Color(8, 100, 245));
-        btnIniciar.setColorOver(new java.awt.Color(16, 107, 249));
+        btnIniciar.setBorderColor(new java.awt.Color(110, 125, 255));
+        btnIniciar.setColor(new java.awt.Color(110, 125, 255));
+        btnIniciar.setColorClick(new java.awt.Color(100, 112, 222));
+        btnIniciar.setColorOver(new java.awt.Color(105, 119, 240));
         btnIniciar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnIniciar.setRadius(20);
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -244,15 +291,15 @@ public class Menu_Inicial extends javax.swing.JFrame {
         panelRound1Layout.setHorizontalGroup(
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(20, 20, 20)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelRound1Layout.createSequentialGroup()
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
                         .addGap(18, 18, 18)
                         .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelRound1Layout.createSequentialGroup()
@@ -316,16 +363,16 @@ public class Menu_Inicial extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -387,6 +434,46 @@ public class Menu_Inicial extends javax.swing.JFrame {
         iniciarSimulacion();
     }//GEN-LAST:event_btnIniciarActionPerformed
 
+    private void txtTiempoIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoIKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtTiempoI);
+    }//GEN-LAST:event_txtTiempoIKeyReleased
+
+    private void txtCostoIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoIKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtCostoI);
+    }//GEN-LAST:event_txtCostoIKeyReleased
+
+    private void txtTiempoPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoPKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtTiempoP);
+    }//GEN-LAST:event_txtTiempoPKeyReleased
+
+    private void txtCostoPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoPKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtCostoP);
+    }//GEN-LAST:event_txtCostoPKeyReleased
+
+    private void txtTiempoEKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoEKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtTiempoE);
+    }//GEN-LAST:event_txtTiempoEKeyReleased
+
+    private void txtCostoEKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoEKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtCostoE);
+    }//GEN-LAST:event_txtCostoEKeyReleased
+
+    private void txtTiempoSKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTiempoSKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtTiempoS);
+    }//GEN-LAST:event_txtTiempoSKeyReleased
+
+    private void txtCostoSKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoSKeyReleased
+        // TODO add your handling code here:
+        verificarNum(txtCostoS);
+    }//GEN-LAST:event_txtCostoSKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -405,13 +492,15 @@ public class Menu_Inicial extends javax.swing.JFrame {
         //UIManager.put("defaultFont", new Font("Montserrat", 0, 13));
         UIManager.put("Component.arrowType", "chevron");
         //85/89/146
+
         UIManager.put("Component.focusedBorderColor", new Color(129, 135, 222));
-        UIManager.put("TextComponent.arc", 10);
+        UIManager.put("Component.borderColor", new Color(32, 33, 44));
+        UIManager.put("TextComponent.arc", 15);
         UIManager.put("Component.arc", 10);
         UIManager.put("TextField.margin", new Insets(0, 10, 0, 10));
         UIManager.put("PasswordField.margin", new Insets(0, 10, 0, 10));
         UIManager.put("ComboBox.selectionArc", 10);
-        UIManager.put("TextField.background", new Color(28, 29, 33));
+        UIManager.put("TextField.background", new Color(41,42,56));
         //</editor-fold> 28, 29, 33
 
         /* Create and display the form */

@@ -8,6 +8,7 @@ import static Interfaz.Simulacion.numInventario;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 public class SpawnLabels extends Thread {
 
@@ -99,9 +100,10 @@ public class SpawnLabels extends Thread {
                         label.setVisible(false);
                         Component[] c5 = Simulacion.panelTransicion.getComponents();
                         Simulacion.lblContadorF.setText(c5.length + "");
-                        if (c5.length == 15) {
+                        if (c5.length == 30) {
                             Simulacion.bloqueoBTN = true;
                             this.interrupt();
+                            JOptionPane.showMessageDialog(null, "La simulación ha finalizado","Finalizado",JOptionPane.INFORMATION_MESSAGE);
                             break;
                         }
                     }
@@ -276,7 +278,7 @@ public class SpawnLabels extends Thread {
                 Simulacion.numSalida.setText(components5.length + "");
                 int c5 = Simulacion.panelTransicion.getComponentCount();
                 Simulacion.numSalida.setText(components5.length + "");
-                if (c5 >= 15) {
+                if (c5 >= 30) {
                     Simulacion.t.apagar();
                 }
                 label.setBounds(60, 90, 50, 50);

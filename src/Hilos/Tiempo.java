@@ -4,15 +4,40 @@ import javax.swing.JLabel;
 
 public class Tiempo extends Thread {
 
-    JLabel rotulo;
-    JLabel rotuloS;
-    public static boolean activar;
+    private JLabel rotulo;
+    private JLabel rotuloS;
+    private boolean activar;
 
     public Tiempo(JLabel rotulo, JLabel rotuloS, boolean activar) {
-        this.rotulo = rotulo;
+        setRotulo(rotulo);
         this.activar = activar;
+        setRotuloS(rotuloS);
+    }
+
+    public JLabel getRotulo() {
+        return rotulo;
+    }
+
+    public void setRotulo(JLabel rotulo) {
+        this.rotulo = rotulo;
+    }
+
+    public JLabel getRotuloS() {
+        return rotuloS;
+    }
+
+    public void setRotuloS(JLabel rotuloS) {
         this.rotuloS = rotuloS;
     }
+
+    public boolean isActivar() {
+        return activar;
+    }
+
+    public void setActivar(boolean activar) {
+        this.activar = activar;
+    }
+    
 
     @Override
     public void run() {
@@ -26,8 +51,8 @@ public class Tiempo extends Thread {
         int segundos = 0;
         while (activar) {
             
-            rotulo.setText(String.format("%02d", min));
-            rotuloS.setText(String.format("%02d", segundos));
+            getRotulo().setText(String.format("%02d", min));
+            getRotuloS().setText(String.format("%02d", segundos));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -50,5 +75,5 @@ public class Tiempo extends Thread {
 
     public void activar() {
         activar = true;
-    }
+    }  
 }

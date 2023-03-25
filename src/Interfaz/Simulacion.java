@@ -72,7 +72,16 @@ public class Simulacion extends javax.swing.JFrame {
             }
 
         }));
+        FlatSVGIcon svgBtn3 = new FlatSVGIcon("img/regresar1.svg");
+        svgBtn3.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+            @Override
+            public Color apply(Color t) {
+                return new Color(255, 255, 255);
+            }
+
+        }));
         btnReporte.setIcon(svgBtn2);
+        btnRegresar.setIcon(svgBtn3);
         FlatSVGIcon arriba = new FlatSVGIcon("img/flechaA2.svg", 40, 40);
         FlatSVGIcon izquierda = new FlatSVGIcon("img/flechaI.svg", 40, 40);
         FlatSVGIcon abajo = new FlatSVGIcon("img/flechaAbajo.svg", 40, 40);
@@ -93,7 +102,7 @@ public class Simulacion extends javax.swing.JFrame {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 1; i <= 15; i++) {
+                for (int i = 1; i <= 30; i++) {
                     contadorInicio--;
                     lblContadorI.setText(contadorInicio + "");
                     SpawnLabels sp = new SpawnLabels(panelPrincipal, Cronometro, 1);
@@ -194,7 +203,7 @@ public class Simulacion extends javax.swing.JFrame {
         panelRound7 = new Elementos.PanelRound();
         lblSeg = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        buttonRound1 = new Elementos.ButtonRound();
+        btnRegresar = new Elementos.ButtonRound();
         btnReporte = new Elementos.ButtonRound();
         panelRound1 = new Elementos.PanelRound();
         panelPrincipal = new javax.swing.JLayeredPane();
@@ -246,7 +255,7 @@ public class Simulacion extends javax.swing.JFrame {
         panelRound2.setRoundTopLeft(15);
         panelRound2.setRoundTopRight(15);
 
-        lblMin.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblMin.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblMin.setForeground(new java.awt.Color(255, 255, 255));
         lblMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMin.setText("00");
@@ -271,7 +280,7 @@ public class Simulacion extends javax.swing.JFrame {
         panelRound7.setRoundTopLeft(15);
         panelRound7.setRoundTopRight(15);
 
-        lblSeg.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        lblSeg.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         lblSeg.setForeground(new java.awt.Color(255, 255, 255));
         lblSeg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSeg.setText("00");
@@ -294,28 +303,28 @@ public class Simulacion extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText(":");
 
-        buttonRound1.setBorder(null);
-        buttonRound1.setForeground(new java.awt.Color(255, 255, 255));
-        buttonRound1.setText("Regresar");
-        buttonRound1.setBorderColor(new java.awt.Color(31, 118, 254));
-        buttonRound1.setColor(new java.awt.Color(31, 118, 254));
-        buttonRound1.setColorClick(new java.awt.Color(8, 100, 245));
-        buttonRound1.setColorOver(new java.awt.Color(16, 107, 249));
-        buttonRound1.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        buttonRound1.setRadius(20);
-        buttonRound1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBorder(null);
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegresar.setText(" Regresar");
+        btnRegresar.setBorderColor(new java.awt.Color(110, 125, 255));
+        btnRegresar.setColor(new java.awt.Color(110, 125, 255));
+        btnRegresar.setColorClick(new java.awt.Color(100, 112, 222));
+        btnRegresar.setColorOver(new java.awt.Color(105, 119, 240));
+        btnRegresar.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        btnRegresar.setRadius(20);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRound1ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
         btnReporte.setBorder(null);
         btnReporte.setForeground(new java.awt.Color(255, 255, 255));
-        btnReporte.setText("Reporte");
-        btnReporte.setBorderColor(new java.awt.Color(31, 118, 254));
-        btnReporte.setColor(new java.awt.Color(31, 118, 254));
-        btnReporte.setColorClick(new java.awt.Color(8, 100, 245));
-        btnReporte.setColorOver(new java.awt.Color(16, 107, 249));
+        btnReporte.setText(" Reporte");
+        btnReporte.setBorderColor(new java.awt.Color(110, 125, 255));
+        btnReporte.setColor(new java.awt.Color(110, 125, 255));
+        btnReporte.setColorClick(new java.awt.Color(100, 112, 222));
+        btnReporte.setColorOver(new java.awt.Color(105, 119, 240));
         btnReporte.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         btnReporte.setRadius(20);
         btnReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -330,7 +339,7 @@ public class Simulacion extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -352,7 +361,7 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -543,8 +552,8 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGroup(panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRound5Layout.createSequentialGroup()
                         .addContainerGap()
@@ -630,21 +639,21 @@ public class Simulacion extends javax.swing.JFrame {
         lblContadorF.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblContadorF.setText("0");
         panelPrincipal.add(lblContadorF);
-        lblContadorF.setBounds(0, 170, 70, 30);
+        lblContadorF.setBounds(-10, 170, 80, 30);
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Final");
         panelPrincipal.add(jLabel6);
-        jLabel6.setBounds(0, 140, 70, 30);
+        jLabel6.setBounds(-10, 150, 80, 20);
 
         jLabel9.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Inicio");
         panelPrincipal.add(jLabel9);
-        jLabel9.setBounds(740, 146, 60, 30);
+        jLabel9.setBounds(740, 156, 60, 20);
         panelPrincipal.add(flecha1);
         flecha1.setBounds(560, 200, 40, 60);
 
@@ -709,7 +718,7 @@ public class Simulacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRound1ActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         if (bloqueoBTN) {
             Menu_Inicial m = new Menu_Inicial();
@@ -723,7 +732,7 @@ public class Simulacion extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_buttonRound1ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
@@ -779,8 +788,8 @@ public class Simulacion extends javax.swing.JFrame {
     public static javax.swing.JPanel InventarioE;
     public static javax.swing.JPanel Produccion1;
     public static javax.swing.JPanel Salida1;
+    private Elementos.ButtonRound btnRegresar;
     private Elementos.ButtonRound btnReporte;
-    private Elementos.ButtonRound buttonRound1;
     public static javax.swing.JPanel conector1;
     public static Elementos.SVGImages flecha1;
     private javax.swing.JLabel jLabel1;
