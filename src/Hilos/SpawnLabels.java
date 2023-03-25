@@ -42,6 +42,7 @@ public class SpawnLabels extends Thread {
         LIMITE_PROD = Menu_Inicial.tiempoP * 1000;
         LIMITE_EMPAQUETADO = Menu_Inicial.tiempoE * 1000;
         LIMITE_SALIDA = Menu_Inicial.tiempoS * 1000;
+        label.cambiar();
         this.crono = crono;
         this.varInventario = i;
     }
@@ -100,6 +101,7 @@ public class SpawnLabels extends Thread {
                         Simulacion.lblContadorF.setText(c5.length + "");
                         if (c5.length == 15) {
                             Simulacion.bloqueoBTN = true;
+                            this.interrupt();
                             break;
                         }
                     }
@@ -142,7 +144,7 @@ public class SpawnLabels extends Thread {
                 numInventario.setText(components1.length + "");
 
                 try {
-                    Thread.sleep(5000 - 300);
+                    Thread.sleep(LIMITE_INV - 280);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -156,6 +158,7 @@ public class SpawnLabels extends Thread {
             case 2:
                 cambio2 = true;
                 cambio1 = false;
+                Simulacion.flecha1.cambiFlecha1();
                 Simulacion.InventarioE.remove(label);
                 Simulacion.conector1.add(label);
                 Simulacion.InventarioE.revalidate();
@@ -163,7 +166,7 @@ public class SpawnLabels extends Thread {
                 Component[] components2 = Simulacion.InventarioE.getComponents();
                 Simulacion.numInventario.setText(components2.length + "");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(80);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -175,7 +178,7 @@ public class SpawnLabels extends Thread {
                 Simulacion.numProd.setText(c2.length + "");
 
                 try {
-                    Thread.sleep(1000 - 300);
+                    Thread.sleep(LIMITE_PROD - 280);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -191,6 +194,7 @@ public class SpawnLabels extends Thread {
                 cambio2 = false;
                 cambio1 = false;
                 cambio3 = true;
+                Simulacion.lblIzq.cambiFlecha2();
                 Simulacion.Produccion1.remove(label);
                 Simulacion.conector1.add(label);
                 Simulacion.Produccion1.revalidate();
@@ -198,7 +202,7 @@ public class SpawnLabels extends Thread {
                 Component[] components3 = Simulacion.Produccion1.getComponents();
                 Simulacion.numProd.setText(components3.length + "");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(80);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -210,7 +214,7 @@ public class SpawnLabels extends Thread {
                 Simulacion.numEmpa.setText(c3 + "");
 
                 try {
-                    Thread.sleep(2000 - 300);
+                    Thread.sleep(LIMITE_EMPAQUETADO - 280);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -227,6 +231,7 @@ public class SpawnLabels extends Thread {
                 cambio1 = false;
                 cambio3 = false;
                 cambio4 = true;
+                Simulacion.lblAbajo.cambiFlecha3();
                 Simulacion.Empaquetado.remove(label);
                 Simulacion.conector1.add(label);
                 Simulacion.Empaquetado.revalidate();
@@ -234,7 +239,7 @@ public class SpawnLabels extends Thread {
                 Component[] components4 = Simulacion.Empaquetado.getComponents();
                 Simulacion.numEmpa.setText(components4.length + "");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(80);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -246,11 +251,16 @@ public class SpawnLabels extends Thread {
                 Simulacion.numSalida.setText(c4 + "");
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(LIMITE_SALIDA-200);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                label.T4();
+                try {
+                    Thread.sleep(200);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case 5:
                 cambio2 = false;
@@ -276,5 +286,4 @@ public class SpawnLabels extends Thread {
                 throw new AssertionError();
         }
     }
-
 }

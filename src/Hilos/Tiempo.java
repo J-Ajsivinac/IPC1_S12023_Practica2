@@ -3,7 +3,7 @@ package Hilos;
 import javax.swing.JLabel;
 
 public class Tiempo extends Thread {
-    
+
     JLabel rotulo;
     JLabel rotuloS;
     public static boolean activar;
@@ -18,14 +18,14 @@ public class Tiempo extends Thread {
     public void run() {
 
         try {
-            Thread.sleep(760);
+            Thread.sleep(710);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         int min = 0;
         int segundos = 0;
         while (activar) {
-
+            
             rotulo.setText(String.format("%02d", min));
             rotuloS.setText(String.format("%02d", segundos));
             try {
@@ -33,12 +33,13 @@ public class Tiempo extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            
             segundos++;
             if (segundos == 60) {
                 segundos = 0;
                 min++;
             }
+
         }
 
     }

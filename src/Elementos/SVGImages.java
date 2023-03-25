@@ -22,7 +22,7 @@ public class SVGImages extends JLabel {
 
         }));
         setIcon(svgIcono);
-        cambiar();
+        //cambiar();
     }
 
     public void cambiar() {
@@ -79,7 +79,7 @@ public class SVGImages extends JLabel {
                 }));
 
                 SVGImages.this.repaint();
-                
+
                 this.revalidate();
                 try {
                     Thread.sleep(duration / steps);
@@ -153,6 +153,47 @@ public class SVGImages extends JLabel {
                     e.printStackTrace();
                 }
             }
+        });
+
+        moveThread2.start();
+    }
+
+    public void T4() {
+        Color initialColor = new Color(215, 47, 15);
+        Color finalColor = new Color(244, 121, 96);
+        Thread moveThread2 = new Thread(() -> {
+            int duration = 200; // Duración de la transición en milisegundos
+            int steps = 50; // Número de pasos de la transición
+
+            for (int i = 0; i <= steps; i++) {
+                float ratio = (float) i / steps;
+                int r = (int) (initialColor.getRed() + (finalColor.getRed() - initialColor.getRed()) * ratio);
+                int g = (int) (initialColor.getGreen() + (finalColor.getGreen() - initialColor.getGreen()) * ratio);
+                int b = (int) (initialColor.getBlue() + (finalColor.getBlue() - initialColor.getBlue()) * ratio);
+                Color color = new Color(r, g, b);
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return color;
+                    }
+                }));
+
+                SVGImages.this.repaint();
+                this.revalidate();
+                try {
+                    Thread.sleep(duration / steps);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                @Override
+                public Color apply(Color t) {
+                    return initialColor;
+                }
+            }));
+            SVGImages.this.repaint();
+            this.revalidate();
         });
 
         moveThread2.start();
@@ -250,6 +291,103 @@ public class SVGImages extends JLabel {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        moveThread2.start();
+    }
+
+    public void cambiFlecha1() {
+        Color fondo = new Color(177, 179, 183);
+        Color transicion = new Color(60, 180, 255);
+        Thread moveThread2 = new Thread(() -> {
+
+            for (int i = 0; i < 5; i++) {
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return transicion;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
+                try {
+                    Thread.sleep(18);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return fondo;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
+            }
+        });
+        moveThread2.start();
+
+    }
+
+    public void cambiFlecha2() {
+        Color fondo = new Color(177, 179, 183);
+        Color transicion = new Color(53, 223, 145);
+        Thread moveThread2 = new Thread(() -> {
+
+            for (int i = 0; i < 5; i++) {
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return transicion;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
+                try {
+                    Thread.sleep(18);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return fondo;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
+            }
+        });
+        moveThread2.start();
+    }
+
+    public void cambiFlecha3() {
+        Color fondo = new Color(177, 179, 183);
+        Color transicion = new Color(250, 199, 98);
+        Thread moveThread2 = new Thread(() -> {
+
+            for (int i = 0; i < 5; i++) {
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return transicion;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
+                try {
+                    Thread.sleep(18);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                svgIcono.setColorFilter(new FlatSVGIcon.ColorFilter(new Function<Color, Color>() {
+                    @Override
+                    public Color apply(Color t) {
+                        return fondo;
+                    }
+                }));
+                SVGImages.this.repaint();
+                this.revalidate();
             }
         });
         moveThread2.start();
