@@ -681,7 +681,7 @@ public class Simulacion extends javax.swing.JFrame {
             panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -701,7 +701,7 @@ public class Simulacion extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

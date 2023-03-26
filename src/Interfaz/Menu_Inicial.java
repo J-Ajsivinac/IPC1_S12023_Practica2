@@ -2,12 +2,17 @@ package Interfaz;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+import com.formdev.flatlaf.ui.FlatEmptyBorder;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.Point;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -43,10 +48,16 @@ public class Menu_Inicial extends javax.swing.JFrame {
             }
 
         }));
-        Border border = BorderFactory.createEmptyBorder(0, 10, 0, 0);
-        //txtTiempoI.setBorder(BorderFactory.createCompoundBorder(border, txtTiempoI.getBorder()));
+
+        tiempoI = 0;
+        tiempoP = 0;
+        tiempoE = 0;
+        tiempoS = 0;
+        costoI = 0;
+        costoP = 0;
+        costoE = 0;
+        costoS = 0;
         btnIniciar.setIcon(svgBtn2);
-        //txtTiempoI.putClientProperty("JTextField.leadingIcon", svgBtn2);
 
         //txtTiempoI.putClientProperty("JTextField.leadingIconGap", 20);
     }
@@ -93,6 +104,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isLetter(c)) {
             txt.setEditable(false);
+
             txt.putClientProperty("Component.outlineWidth", 1);
             txt.putClientProperty("JComponent.outline", "error");
         } else {
@@ -126,7 +138,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panelRound1 = new Elementos.PanelRound();
+        panelMenu = new Elementos.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -149,15 +161,15 @@ public class Menu_Inicial extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido a Monkey");
 
-        panelRound1.setBackground(new java.awt.Color(32, 33, 44));
-        panelRound1.setRoundBottomLeft(20);
-        panelRound1.setRoundBottomRight(20);
-        panelRound1.setRoundTopLeft(20);
-        panelRound1.setRoundTopRight(20);
+        panelMenu.setBackground(new java.awt.Color(32, 33, 44));
+        panelMenu.setRoundBottomLeft(20);
+        panelMenu.setRoundBottomRight(20);
+        panelMenu.setRoundTopLeft(20);
+        panelMenu.setRoundTopRight(20);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
@@ -192,6 +204,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         jLabel7.setText("Salida:");
 
         txtTiempoI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoI.setForeground(new java.awt.Color(216, 226, 252));
         txtTiempoI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoIKeyPressed(evt);
@@ -202,6 +215,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtCostoI.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoI.setForeground(new java.awt.Color(216, 226, 252));
         txtCostoI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoIKeyPressed(evt);
@@ -212,6 +226,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtTiempoP.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoP.setForeground(new java.awt.Color(216, 226, 252));
         txtTiempoP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoPKeyPressed(evt);
@@ -222,6 +237,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtCostoP.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoP.setForeground(new java.awt.Color(216, 226, 252));
         txtCostoP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoPKeyPressed(evt);
@@ -232,6 +248,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtTiempoE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoE.setForeground(new java.awt.Color(216, 226, 252));
         txtTiempoE.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoEKeyPressed(evt);
@@ -242,6 +259,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtCostoE.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoE.setForeground(new java.awt.Color(216, 226, 252));
         txtCostoE.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoEKeyPressed(evt);
@@ -252,6 +270,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtCostoS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtCostoS.setForeground(new java.awt.Color(216, 226, 252));
         txtCostoS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCostoSKeyPressed(evt);
@@ -262,6 +281,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         });
 
         txtTiempoS.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        txtTiempoS.setForeground(new java.awt.Color(216, 226, 252));
         txtTiempoS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtTiempoSKeyPressed(evt);
@@ -286,66 +306,66 @@ public class Menu_Inicial extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMenuLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelMenuLayout.createSequentialGroup()
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
+                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelMenuLayout.createSequentialGroup()
                                 .addComponent(txtTiempoS, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                                 .addComponent(txtCostoS, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                                 .addComponent(txtTiempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtCostoE, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtTiempoP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelRound1Layout.createSequentialGroup()
-                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panelMenuLayout.createSequentialGroup()
+                                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                     .addComponent(txtTiempoI))
                                 .addGap(24, 24, 24)
-                                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCostoP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCostoI, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRound1Layout.createSequentialGroup()
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMenuLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempoI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtCostoI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempoP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCostoP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCostoE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempoS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCostoS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -361,7 +381,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -371,7 +391,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(21, 21, 21)
-                .addComponent(panelRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -500,7 +520,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
         UIManager.put("TextField.margin", new Insets(0, 10, 0, 10));
         UIManager.put("PasswordField.margin", new Insets(0, 10, 0, 10));
         UIManager.put("ComboBox.selectionArc", 10);
-        UIManager.put("TextField.background", new Color(41,42,56));
+        UIManager.put("TextField.background", new Color(41, 42, 56));
         //</editor-fold> 28, 29, 33
 
         /* Create and display the form */
@@ -521,7 +541,7 @@ public class Menu_Inicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private Elementos.PanelRound panelRound1;
+    private Elementos.PanelRound panelMenu;
     private javax.swing.JTextField txtCostoE;
     private javax.swing.JTextField txtCostoI;
     private javax.swing.JTextField txtCostoP;

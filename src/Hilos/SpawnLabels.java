@@ -101,9 +101,9 @@ public class SpawnLabels extends Thread {
                         Component[] c5 = Simulacion.panelTransicion.getComponents();
                         Simulacion.lblContadorF.setText(c5.length + "");
                         if (c5.length == 30) {
+                            JOptionPane.showMessageDialog(null, "La simulación ha finalizado", "Finalizado", JOptionPane.INFORMATION_MESSAGE);
                             Simulacion.bloqueoBTN = true;
                             this.interrupt();
-                            JOptionPane.showMessageDialog(null, "La simulación ha finalizado","Finalizado",JOptionPane.INFORMATION_MESSAGE);
                             break;
                         }
                     }
@@ -253,7 +253,7 @@ public class SpawnLabels extends Thread {
                 Simulacion.numSalida.setText(c4 + "");
 
                 try {
-                    Thread.sleep(LIMITE_SALIDA-200);
+                    Thread.sleep(LIMITE_SALIDA - 200);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
